@@ -1,681 +1,549 @@
-<!DOCTYPE html>
-<html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SeniorHaus – Betreuung & Hausmeisterservice</title>
-<style>
-:root {
-    --primary: #c9a449;
-    --bg-light: #fafafa;
-    --bg-soft: #f5f5f5;
-    --text-main: #333;
-    --text-dark: #222;
-}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-/* RESET / BASE */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+<style>
+/* GLOBAL */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    background: #f7f7f7;
+    color: #222;
     line-height: 1.6;
 }
-a {
-    color: inherit;
-    text-decoration: none;
+h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
 }
-ul {
-    list-style: none;
+section {
+    padding: 60px 20px;
 }
-
-/* TOP BAR */
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255,255,255,0.97);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    backdrop-filter: blur(6px);
-}
-.nav-container {
+.container {
     max-width: 1100px;
-    margin: 0 auto;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.brand {
-    font-weight: bold;
-    font-size: 20px;
-    color: var(--text-dark);
-}
-.brand span {
-    color: var(--primary);
-}
-.nav-menu {
-    display: flex;
-    gap: 18px;
-    align-items: center;
-}
-.nav-menu a {
-    font-size: 14px;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
-}
-.nav-menu a:hover {
-    border-color: var(--primary);
+    margin: auto;
 }
 
-/* LANGUAGE DROPDOWN */
-.lang-switcher {
-    position: relative;
-    margin-left: 20px;
+/* HEADER */
+header {
+    background: #ffffff;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
 }
-.lang-button {
+header .container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    background: #ffffff;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    font-size: 13px;
-    cursor: pointer;
 }
-.lang-flag {
-    font-size: 16px;
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2a7c4f;
 }
-.lang-arrow {
-    font-size: 10px;
-}
-.lang-list {
-    position: absolute;
-    right: 0;
-    margin-top: 4px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    min-width: 150px;
-    display: none;
-    overflow: hidden;
-}
-.lang-list.open {
-    display: block;
-}
-.lang-list button {
-    width: 100%;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #ffffff;
+.lang-switch button {
+    margin-left: 10px;
+    padding: 6px 12px;
     border: none;
-    font-size: 13px;
+    background: #e5e5e5;
     cursor: pointer;
+    border-radius: 6px;
 }
-.lang-list button:hover {
-    background: var(--bg-soft);
+.lang-switch button:hover {
+    background: #ccc;
 }
 
 /* HERO */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.45)),
-                url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-    padding: 130px 20px 110px 20px;
-    color: #ffffff;
-}
-.hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
+    background: linear-gradient(to bottom right, #2a7c4f, #3fa56a);
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
 }
 .hero h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 42px;
 }
 .hero p {
     font-size: 20px;
-    max-width: 650px;
-}
-.hero-badges {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.hero-badge {
-    background: rgba(0,0,0,0.4);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    border: 1px solid rgba(255,255,255,0.4);
+    max-width: 700px;
+    margin: auto;
 }
 
-/* SECTION BASE */
-.section {
-    padding: 60px 20px;
+/* SERVICE CARDS */
+.services {
+    background: #fff;
 }
-.section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-.section h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-    color: var(--text-dark);
-    border-left: 6px solid var(--primary);
-    padding-left: 12px;
-}
-.section p {
-    font-size: 16px;
-}
-
-/* GRID / CARDS */
-.two-cols {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-    gap: 30px;
-    align-items: start;
-}
-@media (max-width: 900px) {
-    .two-cols {
-        grid-template-columns: 1fr;
-    }
-}
-.card {
-    background: var(--bg-light);
-    border-radius: 12px;
-    padding: 20px;
-    border: 1px solid #eee;
-}
-
-/* SERVICES */
-.services-grid {
+.service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-top: 20px;
+    gap: 25px;
+    margin-top: 40px;
 }
-.service-box {
-    border: 1px solid #eee;
-    padding: 20px;
-    border-radius: 10px;
-    background: #ffffff;
+.service-card {
+    background: #fafafa;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
     transition: 0.3s;
 }
-.service-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-.service-box h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--primary);
-    font-size: 18px;
-}
-.service-list {
-    font-size: 14px;
-}
-.service-list li {
-    margin-bottom: 4px;
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: #2a7c4f;
 }
 
-/* PRICES */
-.price-section {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-    gap: 30px;
-}
-@media (max-width: 1000px) {
-    .price-section {
-        grid-template-columns: 1fr;
-    }
-}
-.price-card-title {
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: var(--text-dark);
-}
-.price-card-sub {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #666;
-}
+/* PRICE TABLES */
 .price-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
-    margin-top: 10px;
-}
-.price-table th,
-.price-table td {
-    border: 1px solid #e3e3e3;
-    padding: 8px 10px;
-    text-align: left;
+    margin-top: 25px;
 }
 .price-table th {
-    background: var(--bg-soft);
-    font-weight: bold;
+    background: #2a7c4f;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+.price-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 .price-note {
-    font-size: 13px;
-    color: #666;
-    margin-top: 8px;
-}
-
-/* SUBSCRIPTIONS */
-.subs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-.sub-card {
-    border-radius: 12px;
-    border: 1px solid #eee;
-    padding: 18px;
-    background: #ffffff;
-}
-.sub-name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 4px;
-}
-.sub-price {
-    color: var(--primary);
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-.sub-list {
+    margin-top: 10px;
     font-size: 14px;
-}
-.sub-list li {
-    margin-bottom: 4px;
+    color: #444;
 }
 
-/* VIDEOS */
-.video-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
-    margin-top: 15px;
+/* HAUSMEISTER & ABOS */
+.hm-section {
+    background: #ffffff;
+    border-top: 3px solid #2a7c4f;
 }
-.video-wrapper iframe {
-    width: 100%;
-    height: 320px;
-    border-radius: 10px;
-    border: none;
+.abos-section {
+    background: #f0f7f3;
+    border-top: 3px solid #3fa56a;
 }
 
 /* CONTACT */
-.contact-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-    gap: 30px;
+.contact {
+    background: #2a7c4f;
+    color: white;
+    text-align: center;
 }
-@media (max-width: 900px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
+.contact a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
 }
-.contact-box {
-    background: var(--bg-soft);
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 15px;
-}
-.contact-box p {
-    margin-bottom: 6px;
-}
-.contact-label {
-    font-weight: bold;
-    color: var(--primary);
-}
-.contact-form-group {
-    margin-bottom: 12px;
-}
-.contact-form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 4px;
-}
-.contact-form-group input,
-.contact-form-group textarea {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-family: inherit;
-    font-size: 14px;
-}
-.contact-form-group textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-.btn-primary {
-    background: var(--primary);
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 18px;
-    cursor: pointer;
-    font-size: 14px;
-}
-.btn-primary:hover {
-    filter: brightness(1.05);
+.contact a:hover {
+    text-decoration: underline;
 }
 
 /* FOOTER */
 footer {
+    background: #111;
+    color: #ccc;
     text-align: center;
-    padding: 20px;
-    background: #222;
-    color: #ddd;
-    font-size: 13px;
-    margin-top: 40px;
-}
-
-/* RESPONSIVE NAV (proste) */
-@media (max-width: 720px) {
-    .nav-menu {
-        display: none;
-    }
+    padding: 25px;
+    font-size: 14px;
 }
 </style>
 </head>
 <body>
 
-<header class="header">
-    <div class="nav-container">
-        <div class="brand">
-            <span>Senior</span>Haus
+<header>
+    <div class="container">
+        <div class="logo" data-lang-de="SeniorHaus – Betreuung & Alltagshilfe"
+             data-lang-pl="SeniorHaus – Opieka i pomoc domowa"
+             data-lang-en="SeniorHaus – Care & Daily Support">
+            SeniorHaus – Betreuung & Alltagshilfe
         </div>
-        <nav class="nav-menu" id="main-nav">
-            <a href="#start" data-i18n="nav_start"></a>
-            <a href="#about" data-i18n="nav_about"></a>
-            <a href="#services" data-i18n="nav_services"></a>
-            <a href="#prices" data-i18n="nav_prices"></a>
-            <a href="#videos" data-i18n="nav_videos"></a>
-            <a href="#contact" data-i18n="nav_contact"></a>
-        </nav>
-        <div class="lang-switcher">
-            <button class="lang-button" id="lang-button" type="button">
-                <span class="lang-flag" id="lang-flag">🇩🇪</span>
-                <span id="lang-label">DE</span>
-                <span class="lang-arrow">▼</span>
-            </button>
-            <div class="lang-list" id="lang-list">
-                <button type="button" data-lang="de"><span class="lang-flag">🇩🇪</span>DE – Deutsch</button>
-                <button type="button" data-lang="pl"><span class="lang-flag">🇵🇱</span>PL – Polski</button>
-                <button type="button" data-lang="en"><span class="lang-flag">🇬🇧</span>EN – English</button>
-                <button type="button" data-lang="it"><span class="lang-flag">🇮🇹</span>IT – Italiano</button>
-                <button type="button" data-lang="sk"><span class="lang-flag">🇸🇰</span>SK – Slovenský</button>
-            </div>
+
+        <div class="lang-switch">
+            <button onclick="setLang('de')">DE</button>
+            <button onclick="setLang('pl')">PL</button>
+            <button onclick="setLang('en')">EN</button>
         </div>
     </div>
 </header>
 
-<main>
-    <!-- HERO -->
-    <section id="start" class="hero">
-        <div class="hero-inner">
-            <h1 data-i18n="hero_title"></h1>
-            <p data-i18n="hero_subtitle"></p>
-            <div class="hero-badges">
-                <div class="hero-badge" data-i18n="hero_badge_1"></div>
-                <div class="hero-badge" data-i18n="hero_badge_2"></div>
-                <div class="hero-badge" data-i18n="hero_badge_3"></div>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+    <h1 data-lang-de="Betreuung, Alltagshilfe & Hausmeisterservice"
+        data-lang-pl="Opieka, pomoc domowa i usługi techniczne"
+        data-lang-en="Care, daily support & handyman services">
+        Betreuung, Alltagshilfe & Hausmeisterservice
+    </h1>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-        <div class="section-inner two-cols">
-            <div>
-                <h2 data-i18n="about_title"></h2>
-                <p data-i18n="about_text_1"></p>
-                <p data-i18n="about_text_2"></p>
-            </div>
-            <div class="card">
-                <p class="price-card-title" data-i18n="about_box_title"></p>
-                <p class="price-card-sub" data-i18n="about_box_sub"></p>
-                <ul class="service-list">
-                    <li data-i18n="about_box_item_1"></li>
-                    <li data-i18n="about_box_item_2"></li>
-                    <li data-i18n="about_box_item_3"></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <p data-lang-de="Professionelle Unterstützung für Senioren und Haushalte in Kärnten & Steiermark – Hauptstandort Wolfsberg."
+       data-lang-pl="Profesjonalne wsparcie dla seniorów i gospodarstw domowych w Karyntii i Styrii – główna lokalizacja Wolfsberg."
+       data-lang-en="Professional support for seniors and households in Carinthia & Styria – main location Wolfsberg.">
+       Professionelle Unterstützung für Senioren und Haushalte in Kärnten & Steiermark – Hauptstandort Wolfsberg.
+    </p>
+</section>
 
-    <!-- SERVICES -->
-    <section id="services" class="section">
-        <div class="section-inner">
-            <h2 data-i18n="services_title"></h2>
-            <div class="services-grid">
-                <div class="service-box">
-                    <h3 data-i18n="services_care_title"></h3>
-                    <ul class="service-list">
-                        <li data-i18n="services_care_item_1"></li>
-                        <li data-i18n="services_care_item_2"></li>
-                        <li data-i18n="services_care_item_3"></li>
-                        <li data-i18n="services_care_item_4"></li>
-                    </ul>
-                </div>
-                <div class="service-box">
-                    <h3 data-i18n="services_haus_title"></h3>
-                    <ul class="service-list">
-                        <li data-i18n="services_haus_item_1"></li>
-                        <li data-i18n="services_haus_item_2"></li>
-                        <li data-i18n="services_haus_item_3"></li>
-                        <li data-i18n="services_haus_item_4"></li>
-                        <li data-i18n="services_haus_item_5"></li>
-                    </ul>
-                </div>
-                <div class="service-box">
-                    <h3 data-i18n="services_family_title"></h3>
-                    <ul class="service-list">
-                        <li data-i18n="services_family_item_1"></li>
-                        <li data-i18n="services_family_item_2"></li>
-                        <li data-i18n="services_family_item_3"></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="services">
+    <div class="container">
+        <h2 data-lang-de="Unsere Leistungen"
+            data-lang-pl="Nasze usługi"
+            data-lang-en="Our services">
+            Unsere Leistungen
+        </h2>
 
-    <!-- PRICES -->
-    <section id="prices" class="section">
-        <div class="section-inner">
-            <h2 data-i18n="prices_title"></h2>
+        <div class="service-grid">
 
-            <div class="price-section">
-                <!-- CARE -->
-                <div class="card">
-                    <div class="price-card-title" data-i18n="prices_care_title"></div>
-                    <div class="price-card-sub" data-i18n="prices_care_sub"></div>
-                    <p data-i18n="prices_care_text"></p>
-                </div>
-
-                <!-- HAUSMEISTER TABLE -->
-                <div class="card">
-                    <div class="price-card-title" data-i18n="prices_haus_title"></div>
-                    <div class="price-card-sub" data-i18n="prices_haus_sub"></div>
-                    <table class="price-table">
-                        <thead>
-                            <tr>
-                                <th data-i18n="prices_haus_col_service"></th>
-                                <th data-i18n="prices_haus_col_price"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-i18n="prices_haus_row_1_service"></td>
-                                <td>€22</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_2_service"></td>
-                                <td>€35</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_3_service"></td>
-                                <td>€30</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_4_service"></td>
-                                <td>€25</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_5_service"></td>
-                                <td>€25</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_6_service"></td>
-                                <td>€25</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_7_service"></td>
-                                <td>€25</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_8_service"></td>
-                                <td>€20</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_9_service"></td>
-                                <td data-i18n="prices_haus_row_9_price"></td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="prices_haus_row_10_service"></td>
-                                <td>€0.50/km</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="price-note" data-i18n="prices_haus_note"></p>
-                </div>
+            <div class="service-card">
+                <h3 data-lang-de="Alltagshilfe"
+                    data-lang-pl="Pomoc w codziennych czynnościach"
+                    data-lang-en="Daily assistance">
+                    Alltagshilfe
+                </h3>
+                <p data-lang-de="Unterstützung im Haushalt, Einkäufe, Begleitung."
+                   data-lang-pl="Wsparcie w domu, zakupy, towarzyszenie."
+                   data-lang-en="Household help, shopping, companionship.">
+                   Unterstützung im Haushalt, Einkäufe, Begleitung.
+                </p>
             </div>
 
-            <!-- SUBSCRIPTIONS -->
-            <div style="margin-top: 35px;">
-                <h3 data-i18n="prices_subs_title" style="margin-bottom:10px;"></h3>
-                <p data-i18n="prices_subs_sub"></p>
-                <div class="subs-grid">
-                    <div class="sub-card">
-                        <div class="sub-name">BASIC</div>
-                        <div class="sub-price">€79 / <span data-i18n="prices_subs_month"></span></div>
-                        <ul class="sub-list">
-                            <li data-i18n="prices_subs_basic_1"></li>
-                            <li data-i18n="prices_subs_basic_2"></li>
-                            <li data-i18n="prices_subs_basic_3"></li>
-                        </ul>
-                    </div>
-                    <div class="sub-card">
-                        <div class="sub-name">STANDARD</div>
-                        <div class="sub-price">€159 / <span data-i18n="prices_subs_month"></span></div>
-                        <ul class="sub-list">
-                            <li data-i18n="prices_subs_standard_1"></li>
-                            <li data-i18n="prices_subs_standard_2"></li>
-                            <li data-i18n="prices_subs_standard_3"></li>
-                        </ul>
-                    </div>
-                    <div class="sub-card">
-                        <div class="sub-name">PREMIUM</div>
-                        <div class="sub-price">€299 / <span data-i18n="prices_subs_month"></span></div>
-                        <ul class="sub-list">
-                            <li data-i18n="prices_subs_premium_1"></li>
-                            <li data-i18n="prices_subs_premium_2"></li>
-                            <li data-i18n="prices_subs_premium_3"></li>
-                            <li data-i18n="prices_subs_premium_4"></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="service-card">
+                <h3 data-lang-de="Seniorenbetreuung"
+                    data-lang-pl="Opieka nad seniorami"
+                    data-lang-en="Senior care">
+                    Seniorenbetreuung
+                </h3>
+                <p data-lang-de="Individuelle Betreuung nach Bedarf."
+                   data-lang-pl="Indywidualna opieka według potrzeb."
+                   data-lang-en="Individual care based on needs.">
+                   Individuelle Betreuung nach Bedarf.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <h3 data-lang-de="Haushalt & Reinigung"
+                    data-lang-pl="Dom i sprzątanie"
+                    data-lang-en="Home & cleaning">
+                    Haushalt & Reinigung
+                </h3>
+                <p data-lang-de="Regelmäßige oder einmalige Reinigung."
+                   data-lang-pl="Regularne lub jednorazowe sprzątanie."
+                   data-lang-en="Regular or one-time cleaning.">
+                   Regelmäßige oder einmalige Reinigung.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <h3 data-lang-de="Handwerkerarbeiten"
+                    data-lang-pl="Prace techniczne"
+                    data-lang-en="Handyman work">
+                    Handwerkerarbeiten
+                </h3>
+                <p data-lang-de="Kleine Reparaturen und technische Unterstützung."
+                   data-lang-pl="Drobne naprawy i wsparcie techniczne."
+                   data-lang-en="Small repairs and technical support.">
+                   Kleine Reparaturen und technische Unterstützung.
+                </p>
             </div>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- VIDEOS -->
-    <section id="videos" class="section">
-        <div class="section-inner">
-            <h2 data-i18n="videos_title"></h2>
-            <p data-i18n="videos_text"></p>
-            <div class="video-wrapper">
-                <!-- PODMIEŃ SRC NA SWOJE FILMY -->
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
+<section class="prices">
+    <div class="container">
+        <h2 data-lang-de="Preise – Betreuung & Alltagshilfe"
+            data-lang-pl="Cennik – Opieka i pomoc domowa"
+            data-lang-en="Prices – Care & daily support">
+            Preise – Betreuung & Alltagshilfe
+        </h2>
 
-    <!-- CONTACT + FORM -->
-    <section id="contact" class="section">
-        <div class="section-inner">
-            <h2 data-i18n="contact_title"></h2>
-            <div class="contact-grid">
-                <div class="contact-box">
-                    <p class="contact-label" data-i18n="contact_box_title"></p>
-                    <p>Grzegorz Pawel Kopania</p>
-                    <p>Grazer Straße 13</p>
-                    <p>9400 Wolfsberg, Kärnten</p>
-                    <p><span class="contact-label" data-i18n="contact_phone"></span> +43 664 1455031</p>
-                    <p><span class="contact-label">E-Mail:</span> kontakt@seniorhaus.at</p>
-                    <p data-i18n="contact_box_text"></p>
-                </div>
+        <table class="price-table">
+            <tr>
+                <th data-lang-de="Leistung" data-lang-pl="Usługa" data-lang-en="Service">Leistung</th>
+                <th data-lang-de="Preis" data-lang-pl="Cena" data-lang-en="Price">Preis</th>
+            </tr>
 
-                <div class="card">
-                    <h3 data-i18n="contact_form_title" style="margin-bottom:10px;"></h3>
-                    <p data-i18n="contact_form_sub" style="font-size:14px;margin-bottom:14px;"></p>
-                    <form method="get" id="contact-form">
-                        <div class="contact-form-group">
-                            <label for="name" data-i18n="contact_form_name"></label>
-                            <input type="text" id="name" name="name" required />
-                        </div>
-                        <div class="contact-form-group">
-                            <label for="email" data-i18n="contact_form_email"></label>
-                            <input type="email" id="email" name="email" required />
-                        </div>
-                        <div class="contact-form-group">
-                            <label for="phone" data-i18n="contact_form_phone"></label>
-                            <input type="text" id="phone" name="phone" />
-                        </div>
-                        <div class="contact-form-group">
-                            <label for="message" data-i18n="contact_form_message"></label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" data-i18n="contact_form_submit"></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+            <tr>
+                <td data-lang-de="Alltagshilfe / Haushalt"
+                    data-lang-pl="Pomoc domowa"
+                    data-lang-en="Daily household support">
+                    Alltagshilfe / Haushalt
+                </td>
+                <td>€25</td>
+            </tr>
 
-</main>
+            <tr>
+                <td data-lang-de="Seniorenbetreuung"
+                    data-lang-pl="Opieka nad seniorami"
+                    data-lang-en="Senior care">
+                    Seniorenbetreuung
+                </td>
+                <td>€25</td>
+            </tr>
+
+            <tr>
+                <td data-lang-de="Reinigung"
+                    data-lang-pl="Sprzątanie"
+                    data-lang-en="Cleaning">
+                    Reinigung
+                </td>
+                <td>€25</td>
+            </tr>
+
+            <tr>
+                <td data-lang-de="Handwerkerarbeiten (einfach)"
+                    data-lang-pl="Prace techniczne (proste)"
+                    data-lang-en="Handyman work (basic)">
+                    Handwerkerarbeiten (einfach)
+                </td>
+                <td>€25</td>
+            </tr>
+        </table>
+
+        <p class="price-note"
+           data-lang-de="Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz)."
+           data-lang-pl="Wszystkie ceny bez VAT zgodnie z zasadą małego przedsiębiorcy (obrót do 40 000 € rocznie)."
+           data-lang-en="All prices without VAT according to small business regulation (turnover up to €40,000/year).">
+           Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz).
+        </p>
+    </div>
+</section>
+<!-- HAUSMEISTER – PREISLISTE -->
+<section class="hm-section">
+    <div class="container">
+        <h2 data-lang-de="Hausmeisterservice – Preise"
+            data-lang-pl="Hausmeister – Cennik usług"
+            data-lang-en="Hausmeister service – Price list">
+            Hausmeisterservice – Preise
+        </h2>
+
+        <table class="price-table">
+            <tr>
+                <th data-lang-de="Leistung" data-lang-pl="Usługa" data-lang-en="Service">Leistung</th>
+                <th data-lang-de="Preis (ohne MwSt)" data-lang-pl="Cena (bez VAT)" data-lang-en="Price (no VAT)">Preis</th>
+            </tr>
+
+            <tr><td data-lang-de="Allgemeine Arbeitsstunde" data-lang-pl="Godzina pracy ogólnej" data-lang-en="General working hour">Allgemeine Arbeitsstunde</td><td>€22</td></tr>
+            <tr><td data-lang-de="Notfall-Einsätze" data-lang-pl="Interwencje awaryjne" data-lang-en="Emergency interventions">Notfall-Einsätze</td><td>€35</td></tr>
+            <tr><td data-lang-de="Möbelmontage" data-lang-pl="Montaż mebli" data-lang-en="Furniture assembly">Möbelmontage</td><td>€30</td></tr>
+            <tr><td data-lang-de="Kleine Tischlerarbeiten" data-lang-pl="Drobne prace stolarskie" data-lang-en="Small carpentry work">Kleine Tischlerarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Kleine Sanitärarbeiten" data-lang-pl="Drobne prace sanitarne" data-lang-en="Small plumbing work">Kleine Sanitärarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Kleine Elektroarbeiten" data-lang-pl="Drobne prace elektryczne" data-lang-en="Small electrical work">Kleine Elektroarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Haushalts-/Kleingeräteservice" data-lang-pl="Serwis urządzeń domowych" data-lang-en="Small appliance service">Haushalts-/Kleingeräteservice</td><td>€25</td></tr>
+            <tr><td data-lang-de="Transport / Tragen" data-lang-pl="Transport / noszenie" data-lang-en="Transport / carrying">Transport / Tragen</td><td>€20</td></tr>
+            <tr><td data-lang-de="Anfahrt Wolfsberg" data-lang-pl="Dojazd w Wolfsberg" data-lang-en="Travel within Wolfsberg">Anfahrt Wolfsberg</td><td data-lang-de="gratis" data-lang-pl="gratis" data-lang-en="free">gratis</td></tr>
+            <tr><td data-lang-de="Anfahrt außerhalb Wolfsberg" data-lang-pl="Dojazd poza Wolfsberg" data-lang-en="Travel outside Wolfsberg">Anfahrt außerhalb Wolfsberg</td><td>€0.50/km</td></tr>
+        </table>
+
+        <p class="price-note"
+           data-lang-de="Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz)."
+           data-lang-pl="Wszystkie ceny bez VAT zgodnie z zasadą małego przedsiębiorcy (obrót do 40 000 € rocznie)."
+           data-lang-en="All prices without VAT according to small business regulation (turnover up to €40,000/year).">
+           Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz).
+        </p>
+    </div>
+</section>
+
+<!-- ABONNEMENTS -->
+<section class="abos-section">
+    <div class="container">
+        <h2 data-lang-de="Abonnements – Monatliche Pakete"
+            data-lang-pl="Abonamenty – Pakiety miesięczne"
+            data-lang-en="Subscriptions – Monthly packages">
+            Abonnements – Monatliche Pakete
+        </h2>
+
+        <table class="price-table">
+            <tr>
+                <th data-lang-de="Abo" data-lang-pl="Abonament" data-lang-en="Subscription">Abo</th>
+                <th data-lang-de="Beschreibung" data-lang-pl="Opis" data-lang-en="Description">Beschreibung</th>
+                <th data-lang-de="Preis / Monat" data-lang-pl="Cena / miesiąc" data-lang-en="Price / month">Preis / Monat</th>
+            </tr>
+
+            <tr>
+                <td>BASIC</td>
+                <td data-lang-de="1 Kontrollbesuch pro Monat<br>Kurzbericht<br>Prioritätskontakt"
+                    data-lang-pl="1 wizyta kontrolna miesięcznie<br>Krótki raport<br>Kontakt priorytetowy"
+                    data-lang-en="1 control visit per month<br>Short report<br>Priority contact">
+                    1 Kontrollbesuch pro Monat<br>Kurzbericht<br>Prioritätskontakt
+                </td>
+                <td>€79</td>
+            </tr>
+
+            <tr>
+                <td>STANDARD</td>
+                <td data-lang-de="2 Servicebesuche pro Monat<br>Kleine Reparaturen bis 1 Std. inklusive<br>Rabattierte Zusatzstunden"
+                    data-lang-pl="2 wizyty serwisowe miesięcznie<br>Drobne naprawy do 1h w cenie<br>Zniżkowe dodatkowe godziny"
+                    data-lang-en="2 service visits per month<br>Small repairs up to 1h included<br>Discounted extra hours">
+                    2 Servicebesuche pro Monat<br>Kleine Reparaturen bis 1 Std. inklusive<br>Rabattierte Zusatzstunden
+                </td>
+                <td>€159</td>
+            </tr>
+
+            <tr>
+                <td>PREMIUM</td>
+                <td data-lang-de="4 Besuche pro Monat<br>Reparaturen bis 2 Std.<br>1× monatliche Reinigung<br>24/7 Notdienst"
+                    data-lang-pl="4 wizyty miesięcznie<br>Naprawy do 2h<br>1× miesięczne sprzątanie<br>24/7 pomoc awaryjna"
+                    data-lang-en="4 visits per month<br>Repairs up to 2h<br>1× monthly cleaning<br>24/7 emergency service">
+                    4 Besuche pro Monat<br>Reparaturen bis 2 Std.<br>1× monatliche Reinigung<br>24/7 Notdienst
+                </td>
+                <td>€299</td>
+            </tr>
+        </table>
+
+        <p class="price-note"
+           data-lang-de="Alle Preise ohne MwSt gemäß Kleinunternehmerregelung."
+           data-lang-pl="Wszystkie ceny bez VAT zgodnie z zasadą małego przedsiębiorcy."
+           data-lang-en="All prices without VAT according to small business regulation.">
+           Alle Preise ohne MwSt gemäß Kleinunternehmerregelung.
+        </p>
+    </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact">
+    <div class="container">
+        <h2 data-lang-de="Kontakt"
+            data-lang-pl="Kontakt"
+            data-lang-en="Contact">
+            Kontakt
+        </h2>
+
+        <p>
+            <strong>Telefon:</strong> <a href="tel:+436641455031">+43 664 1455031</a><br>
+            <strong>WhatsApp (bevorzugt):</strong> <a href="https://wa.me/4917615639371">+49 176 15639371</a><br>
+            <strong>E‑Mail:</strong> <a href="mailto:gk90@wp.pl">gk90@wp.pl</a><br>
+            <strong data-lang-de="Region" data-lang-pl="Region" data-lang-en="Region">Region:</strong>
+            Kärnten & Steiermark – Wolfsberg
+        </p>
+    </div>
+</section>
 
 <footer>
-    © <span id="year"></span> SeniorHaus – Betreuung & Hausmeisterservice
+    © 2025 SeniorHaus – Grzegorz Pawel Kopania
+</footer>
+
+<!-- HAUSMEISTER – PREISLISTE -->
+<section class="hm-section">
+    <div class="container">
+        <h2 data-lang-de="Hausmeisterservice – Preise"
+            data-lang-pl="Hausmeister – Cennik usług"
+            data-lang-en="Hausmeister service – Price list">
+            Hausmeisterservice – Preise
+        </h2>
+
+        <table class="price-table">
+            <tr>
+                <th data-lang-de="Leistung" data-lang-pl="Usługa" data-lang-en="Service">Leistung</th>
+                <th data-lang-de="Preis (ohne MwSt)" data-lang-pl="Cena (bez VAT)" data-lang-en="Price (no VAT)">Preis</th>
+            </tr>
+
+            <tr><td data-lang-de="Allgemeine Arbeitsstunde" data-lang-pl="Godzina pracy ogólnej" data-lang-en="General working hour">Allgemeine Arbeitsstunde</td><td>€22</td></tr>
+            <tr><td data-lang-de="Notfall-Einsätze" data-lang-pl="Interwencje awaryjne" data-lang-en="Emergency interventions">Notfall-Einsätze</td><td>€35</td></tr>
+            <tr><td data-lang-de="Möbelmontage" data-lang-pl="Montaż mebli" data-lang-en="Furniture assembly">Möbelmontage</td><td>€30</td></tr>
+            <tr><td data-lang-de="Kleine Tischlerarbeiten" data-lang-pl="Drobne prace stolarskie" data-lang-en="Small carpentry work">Kleine Tischlerarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Kleine Sanitärarbeiten" data-lang-pl="Drobne prace sanitarne" data-lang-en="Small plumbing work">Kleine Sanitärarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Kleine Elektroarbeiten" data-lang-pl="Drobne prace elektryczne" data-lang-en="Small electrical work">Kleine Elektroarbeiten</td><td>€25</td></tr>
+            <tr><td data-lang-de="Haushalts-/Kleingeräteservice" data-lang-pl="Serwis urządzeń domowych" data-lang-en="Small appliance service">Haushalts-/Kleingeräteservice</td><td>€25</td></tr>
+            <tr><td data-lang-de="Transport / Tragen" data-lang-pl="Transport / noszenie" data-lang-en="Transport / carrying">Transport / Tragen</td><td>€20</td></tr>
+            <tr><td data-lang-de="Anfahrt Wolfsberg" data-lang-pl="Dojazd w Wolfsberg" data-lang-en="Travel within Wolfsberg">Anfahrt Wolfsberg</td><td data-lang-de="gratis" data-lang-pl="gratis" data-lang-en="free">gratis</td></tr>
+            <tr><td data-lang-de="Anfahrt außerhalb Wolfsberg" data-lang-pl="Dojazd poza Wolfsberg" data-lang-en="Travel outside Wolfsberg">Anfahrt außerhalb Wolfsberg</td><td>€0.50/km</td></tr>
+        </table>
+
+        <p class="price-note"
+           data-lang-de="Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz)."
+           data-lang-pl="Wszystkie ceny bez VAT zgodnie z zasadą małego przedsiębiorcy (obrót do 40 000 € rocznie)."
+           data-lang-en="All prices without VAT according to small business regulation (turnover up to €40,000/year).">
+           Alle Preise ohne MwSt gemäß Kleinunternehmerregelung (bis 40.000 € Jahresumsatz).
+        </p>
+    </div>
+</section>
+
+<!-- ABONNEMENTS -->
+<section class="abos-section">
+    <div class="container">
+        <h2 data-lang-de="Abonnements – Monatliche Pakete"
+            data-lang-pl="Abonamenty – Pakiety miesięczne"
+            data-lang-en="Subscriptions – Monthly packages">
+            Abonnements – Monatliche Pakete
+        </h2>
+
+        <table class="price-table">
+            <tr>
+                <th data-lang-de="Abo" data-lang-pl="Abonament" data-lang-en="Subscription">Abo</th>
+                <th data-lang-de="Beschreibung" data-lang-pl="Opis" data-lang-en="Description">Beschreibung</th>
+                <th data-lang-de="Preis / Monat" data-lang-pl="Cena / miesiąc" data-lang-en="Price / month">Preis / Monat</th>
+            </tr>
+
+            <tr>
+                <td>BASIC</td>
+                <td data-lang-de="1 Kontrollbesuch pro Monat<br>Kurzbericht<br>Prioritätskontakt"
+                    data-lang-pl="1 wizyta kontrolna miesięcznie<br>Krótki raport<br>Kontakt priorytetowy"
+                    data-lang-en="1 control visit per month<br>Short report<br>Priority contact">
+                    1 Kontrollbesuch pro Monat<br>Kurzbericht<br>Prioritätskontakt
+                </td>
+                <td>€79</td>
+            </tr>
+
+            <tr>
+                <td>STANDARD</td>
+                <td data-lang-de="2 Servicebesuche pro Monat<br>Kleine Reparaturen bis 1 Std. inklusive<br>Rabattierte Zusatzstunden"
+                    data-lang-pl="2 wizyty serwisowe miesięcznie<br>Drobne naprawy do 1h w cenie<br>Zniżkowe dodatkowe godziny"
+                    data-lang-en="2 service visits per month<br>Small repairs up to 1h included<br>Discounted extra hours">
+                    2 Servicebesuche pro Monat<br>Kleine Reparaturen bis 1 Std. inklusive<br>Rabattierte Zusatzstunden
+                </td>
+                <td>€159</td>
+            </tr>
+
+            <tr>
+                <td>PREMIUM</td>
+                <td data-lang-de="4 Besuche pro Monat<br>Reparaturen bis 2 Std.<br>1× monatliche Reinigung<br>24/7 Notdienst"
+                    data-lang-pl="4 wizyty miesięcznie<br>Naprawy do 2h<br>1× miesięczne sprzątanie<br>24/7 pomoc awaryjna"
+                    data-lang-en="4 visits per month<br>Repairs up to 2h<br>1× monthly cleaning<br>24/7 emergency service">
+                    4 Besuche pro Monat<br>Reparaturen bis 2 Std.<br>1× monatliche Reinigung<br>24/7 Notdienst
+                </td>
+                <td>€299</td>
+            </tr>
+        </table>
+
+        <p class="price-note"
+           data-lang-de="Alle Preise ohne MwSt gemäß Kleinunternehmerregelung."
+           data-lang-pl="Wszystkie ceny bez VAT zgodnie z zasadą małego przedsiębiorcy."
+           data-lang-en="All prices without VAT according to small business regulation.">
+           Alle Preise ohne MwSt gemäß Kleinunternehmerregelung.
+        </p>
+    </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact">
+    <div class="container">
+        <h2 data-lang-de="Kontakt"
+            data-lang-pl="Kontakt"
+            data-lang-en="Contact">
+            Kontakt
+        </h2>
+
+        <p>
+            <strong>Telefon:</strong> <a href="tel:+436641455031">+43 664 1455031</a><br>
+            <strong>WhatsApp (bevorzugt):</strong> <a href="https://wa.me/4917615639371">+49 176 15639371</a><br>
+            <strong>E‑Mail:</strong> <a href="mailto:gk90@wp.pl">gk90@wp.pl</a><br>
+            <strong data-lang-de="Region" data-lang-pl="Region" data-lang-en="Region">Region:</strong>
+            Kärnten & Steiermark – Wolfsberg
+        </p>
+    </div>
+</section>
+
+<footer>
+    © 2025 SeniorHaus – Grzegorz Pawel Kopania
 </footer>
 
 <script>
-const translations = {
-    de: {
-        /* NAV */
-        nav_start: "Start",
-        nav_about: "Über uns",
-        nav_services: "Dienstleistungen",
-        nav_prices: "Preise",
-        nav_videos: "Videos",
-        nav_contact: "Kontakt",
+function setLang(lang) {
+    document.querySelectorAll("[data-lang-de]").forEach(el => {
+        if (lang === "de") el.innerHTML = el.getAttribute("data-lang-de");
+        if (lang === "pl") el.innerHTML = el.getAttribute("data-lang-pl");
+        if (lang === "en") el.innerHTML = el.getAttribute("data-lang-en");
+    });
+}
+</script>
 
-        /* HERO */
-        hero_title: "SeniorHaus – Betreuung & Hausmeisterservice",
-        hero_subtitle: "Zuverlässige Seniorenbetreuung und Hausmeisterservice in Wolfsberg und Umgebung – mit Herz, Verstand und hands-on Unterstützung.",
-        hero_bad
+</body>
+</html>
